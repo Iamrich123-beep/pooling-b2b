@@ -8,3 +8,115 @@
     <p>My website is now running on GitHub Pages.</p>
 </body>
 </html>
+// components/Navbar.jsx
+export default function Navbar() {
+  return (
+    <nav className="bg-[#131921] p-3 flex items-center gap-4 shadow-md">
+      {/* Logo */}
+      <div className="text-white font-bold text-2xl px-2 cursor-pointer">
+        <span className="text-orange-500">Pooling</span>B2B
+      </div>
+
+      {/* Search Bar Container */}
+      <div className="flex flex-grow items-center">
+        <select className="bg-gray-100 p-2 rounded-l-md border-r border-gray-300 text-sm hidden md:block">
+          <option>All Materials</option>
+          <option>Packaging</option>
+          <option>Electronics</option>
+        </select>
+        <input 
+          type="text" 
+          placeholder="Search for lead buyers or products..." 
+          className="flex-grow p-2 outline-none"
+        />
+        <button className="bg-orange-400 p-2 rounded-r-md hover:bg-orange-500 transition">
+          <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Account Links */}
+      <div className="text-white text-xs px-2 cursor-pointer hover:border border-white p-1">
+        <p>Hello, Business Admin</p>
+        <p className="font-bold">Accounts & Lists</p>
+      </div>
+    </nav>
+  );
+}// components/ProductCard.jsx
+export default function ProductCard({ type, product }) {
+  const isLead = type === "lead";
+  
+  return (
+    <div className="bg-white border border-gray-200 p-4 rounded hover:shadow-lg transition flex flex-col gap-2">
+      <div className="h-40 bg-gray-100 rounded mb-2 flex items-center justify-center">
+        <span className="text-gray-400">Product Image</span>
+      </div>
+      
+      <div className="flex justify-between items-start">
+        <h3 className="font-bold text-lg leading-tight">{product.name}</h3>
+        <span className={`text-xs px-2 py-1 rounded font-bold uppercase ${isLead ? 'bg-blue-100 text-blue-700' : 'bg-orange-100 text-orange-700'}`}>
+          {isLead ? 'Lead Anchor' : 'Pooling'}
+        </span>
+      </div>
+
+      <p className="text-2xl font-bold text-gray-900">${product.price}<span className="text-sm font-normal">/unit</span></p>
+      
+      {/* Progress Toward MOQ */}
+      <div className="mt-2">
+        <div className="flex justify-between text-xs mb-1">
+          <span>Current: {product.currentQty}</span>
+          <span>MOQ: {product.moq}</span>
+        </div>
+        <div className="w-full bg-gray-200 rounded-full h-2">
+          <div 
+            className="bg-orange-500 h-2 rounded-full" 
+            style={{ width: `${(product.currentQty / product.moq) * 100}%` }}
+          ></div>
+        </div>
+      </div>
+
+      <p className="text-red-600 text-sm font-bold mt-2 italic">Deadline: {product.deadline}</p>
+      
+      <button className="bg-orange-400 w-full py-2 rounded-md font-bold mt-2 hover:bg-orange-500 shadow-sm border border-orange-600">
+        Join & Negotiate
+      </button>
+    </div>
+  );
+}// components/NegotiateModal.jsx
+export default function NegotiateModal({ product }) {
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-xl border border-gray-300 max-w-md">
+      <h2 className="text-xl font-bold mb-4">Suggest New Terms</h2>
+      <p className="text-sm text-gray-500 mb-6">Terms must stay within supplier constraints. Direct messaging is disabled.</p>
+      
+      <div className="space-y-4">
+        {/* Quantity Selection */}
+        <div className="flex items-center justify-between">
+          <label className="font-semibold">Your Quantity:</label>
+          <div className="flex items-center border rounded">
+            <button className="px-3 py-1 bg-gray-100 border-r">-</button>
+            <input type="number" className="w-20 text-center outline-none" defaultValue={100} />
+            <button className="px-3 py-1 bg-gray-100 border-l">+</button>
+          </div>
+        </div>
+
+        {/* Deadline Selection */}
+        <div className="flex items-center justify-between">
+          <label className="font-semibold">Desired Deadline:</label>
+          <input type="date" className="border rounded p-1" defaultValue="2024-12-01" />
+        </div>
+
+        {/* Financial Commit Section */}
+        <div className="bg-orange-50 p-3 rounded border border-orange-200 mt-4">
+          <p className="text-xs text-orange-800 font-bold mb-1 uppercase">Secure Deposit Required</p>
+          <p className="text-sm">To initiate this negotiation, a <span className="font-bold">10% deposit ($250.00)</span> will be held in escrow.</p>
+        </div>
+
+        <button className="w-full bg-orange-400 py-3 rounded font-bold shadow-md hover:bg-orange-500 mt-4">
+          Send Structured Proposal
+        </button>
+      </div>
+    </div>
+  );
+}
