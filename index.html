@@ -120,3 +120,64 @@ export default function NegotiateModal({ product }) {
     </div>
   );
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoolingB2B | Marketplace</title>
+    <style>
+        /* Modern CSS Styling */
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: #f8fafc; color: #1e293b; }
+        
+        /* Navbar */
+        nav { background: #ffffff; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .logo { font-weight: bold; font-size: 1.5rem; color: #2563eb; }
+        .search-bar { padding: 0.5rem; width: 300px; border: 1px solid #cbd5e1; border-radius: 6px; }
+
+        /* Main Container */
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        
+        /* Product Card */
+        .card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); max-width: 400px; border: 1px solid #e2e8f0; }
+        .product-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .badge { background: #dcfce7; color: #166534; padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; }
+        
+        .price { font-size: 1.5rem; font-weight: bold; margin: 1rem 0; color: #2563eb; }
+        
+        /* Progress Bar */
+        .progress-container { background: #e2e8f0; height: 10px; border-radius: 5px; margin: 10px 0; overflow: hidden; }
+        .progress-fill { background: #2563eb; height: 100%; width: 65%; } /* Adjust width based on MOQ */
+
+        /* Buttons */
+        button { background: #2563eb; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s; }
+        button:hover { background: #1d4ed8; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">PoolingB2B</div>
+        <input type="text" class="search-bar" placeholder="Search for lead buyers or products...">
+        <div>Hello, Business Admin</div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <span class="badge">Lead Anchor: Pooling</span>
+            <div class="product-name">Industrial Steel Components</div>
+            <div class="price">$45.00/unit</div>
+            
+            <p><strong>Progress Toward MOQ</strong></p>
+            <div class="progress-container">
+                <div class="progress-fill"></div>
+            </div>
+            <small>Current: 650 units | MOQ: 1000 units</small>
+            <p><small>Deadline: 2026-03-15</small></p>
+
+            <button onclick="alert('Negotiation Started!')">Join & Negotiate</button>
+        </div>
+    </div>
+
+</body>
+</html>
