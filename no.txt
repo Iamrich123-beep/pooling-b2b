@@ -1,6 +1,1 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <h1>Hello World! My site is live.</h1>
-  </body>
-</html>
+
