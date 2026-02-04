@@ -1,181 +1,157 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>My GitHub Site</title>
-</head>
-<body>
-    <h1>Success!</h1>
-    <p>My website is now running on GitHub Pages.</p>
-</body>
-</html>
-// components/Navbar.jsx
-export default function Navbar() {
-  return (
-    <nav className="bg-[#131921] p-3 flex items-center gap-4 shadow-md">
-      {/* Logo */}
-      <div className="text-white font-bold text-2xl px-2 cursor-pointer">
-        <span className="text-orange-500">Pooling</span>B2B
-      </div>
-
-      {/* Search Bar Container */}
-      <div className="flex flex-grow items-center">
-        <select className="bg-gray-100 p-2 rounded-l-md border-r border-gray-300 text-sm hidden md:block">
-          <option>All Materials</option>
-          <option>Packaging</option>
-          <option>Electronics</option>
-        </select>
-        <input 
-          type="text" 
-          placeholder="Search for lead buyers or products..." 
-          className="flex-grow p-2 outline-none"
-        />
-        <button className="bg-orange-400 p-2 rounded-r-md hover:bg-orange-500 transition">
-          <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-        </button>
-      </div>
-
-      {/* Account Links */}
-      <div className="text-white text-xs px-2 cursor-pointer hover:border border-white p-1">
-        <p>Hello, Business Admin</p>
-        <p className="font-bold">Accounts & Lists</p>
-      </div>
-    </nav>
-  );
-}// components/ProductCard.jsx
-export default function ProductCard({ type, product }) {
-  const isLead = type === "lead";
-  
-  return (
-    <div className="bg-white border border-gray-200 p-4 rounded hover:shadow-lg transition flex flex-col gap-2">
-      <div className="h-40 bg-gray-100 rounded mb-2 flex items-center justify-center">
-        <span className="text-gray-400">Product Image</span>
-      </div>
-      
-      <div className="flex justify-between items-start">
-        <h3 className="font-bold text-lg leading-tight">{product.name}</h3>
-        <span className={`text-xs px-2 py-1 rounded font-bold uppercase ${isLead ? 'bg-blue-100 text-blue-700' : 'bg-orange-100 text-orange-700'}`}>
-          {isLead ? 'Lead Anchor' : 'Pooling'}
-        </span>
-      </div>
-
-      <p className="text-2xl font-bold text-gray-900">${product.price}<span className="text-sm font-normal">/unit</span></p>
-      
-      {/* Progress Toward MOQ */}
-      <div className="mt-2">
-        <div className="flex justify-between text-xs mb-1">
-          <span>Current: {product.currentQty}</span>
-          <span>MOQ: {product.moq}</span>
-        </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
-          <div 
-            className="bg-orange-500 h-2 rounded-full" 
-            style={{ width: `${(product.currentQty / product.moq) * 100}%` }}
-          ></div>
-        </div>
-      </div>
-
-      <p className="text-red-600 text-sm font-bold mt-2 italic">Deadline: {product.deadline}</p>
-      
-      <button className="bg-orange-400 w-full py-2 rounded-md font-bold mt-2 hover:bg-orange-500 shadow-sm border border-orange-600">
-        Join & Negotiate
-      </button>
-    </div>
-  );
-}// components/NegotiateModal.jsx
-export default function NegotiateModal({ product }) {
-  return (
-    <div className="bg-white p-6 rounded-lg shadow-xl border border-gray-300 max-w-md">
-      <h2 className="text-xl font-bold mb-4">Suggest New Terms</h2>
-      <p className="text-sm text-gray-500 mb-6">Terms must stay within supplier constraints. Direct messaging is disabled.</p>
-      
-      <div className="space-y-4">
-        {/* Quantity Selection */}
-        <div className="flex items-center justify-between">
-          <label className="font-semibold">Your Quantity:</label>
-          <div className="flex items-center border rounded">
-            <button className="px-3 py-1 bg-gray-100 border-r">-</button>
-            <input type="number" className="w-20 text-center outline-none" defaultValue={100} />
-            <button className="px-3 py-1 bg-gray-100 border-l">+</button>
-          </div>
-        </div>
-
-        {/* Deadline Selection */}
-        <div className="flex items-center justify-between">
-          <label className="font-semibold">Desired Deadline:</label>
-          <input type="date" className="border rounded p-1" defaultValue="2024-12-01" />
-        </div>
-
-        {/* Financial Commit Section */}
-        <div className="bg-orange-50 p-3 rounded border border-orange-200 mt-4">
-          <p className="text-xs text-orange-800 font-bold mb-1 uppercase">Secure Deposit Required</p>
-          <p className="text-sm">To initiate this negotiation, a <span className="font-bold">10% deposit ($250.00)</span> will be held in escrow.</p>
-        </div>
-
-        <button className="w-full bg-orange-400 py-3 rounded font-bold shadow-md hover:bg-orange-500 mt-4">
-          Send Structured Proposal
-        </button>
-      </div>
-    </div>
-  );
-}
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PoolingB2B | Marketplace</title>
     <style>
-        /* Modern CSS Styling */
-        body { font-family: 'Inter', sans-serif; margin: 0; background-color: #f8fafc; color: #1e293b; }
-        
-        /* Navbar */
-        nav { background: #ffffff; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .logo { font-weight: bold; font-size: 1.5rem; color: #2563eb; }
-        .search-bar { padding: 0.5rem; width: 300px; border: 1px solid #cbd5e1; border-radius: 6px; }
+        /* Modern Branding & Colors */
+        :root {
+            --primary-orange: #ff6b00; /* Main Brand Color */
+            --dark-orange: #e65a00;
+            --light-orange: #fff5ed;
+            --text-dark: #2d3436;
+            --bg-gray: #fafafa;
+        }
 
-        /* Main Container */
-        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            background-color: var(--bg-gray); 
+            color: var(--text-dark); 
+        }
+
+        /* Navbar */
+        nav { 
+            background: #ffffff; 
+            padding: 1rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 3px solid var(--primary-orange);
+        }
+        
+        .logo { 
+            font-weight: 800; 
+            font-size: 1.6rem; 
+            color: var(--primary-orange); 
+            text-decoration: none;
+        }
+
+        .search-bar { 
+            padding: 0.6rem 1rem; 
+            width: 350px; 
+            border: 2px solid #eee; 
+            border-radius: 50px; 
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar:focus { border-color: var(--primary-orange); }
+
+        /* Content Layout */
+        .container { max-width: 1100px; margin: 3rem auto; padding: 0 20px; }
         
         /* Product Card */
-        .card { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); max-width: 400px; border: 1px solid #e2e8f0; }
-        .product-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .badge { background: #dcfce7; color: #166534; padding: 0.25rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; }
-        
-        .price { font-size: 1.5rem; font-weight: bold; margin: 1rem 0; color: #2563eb; }
-        
-        /* Progress Bar */
-        .progress-container { background: #e2e8f0; height: 10px; border-radius: 5px; margin: 10px 0; overflow: hidden; }
-        .progress-fill { background: #2563eb; height: 100%; width: 65%; } /* Adjust width based on MOQ */
+        .card { 
+            background: white; 
+            border-radius: 16px; 
+            padding: 2rem; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            max-width: 450px; 
+            border-top: 5px solid var(--primary-orange);
+        }
 
-        /* Buttons */
-        button { background: #2563eb; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s; }
-        button:hover { background: #1d4ed8; }
+        .badge { 
+            background: var(--light-orange); 
+            color: var(--primary-orange); 
+            padding: 5px 12px; 
+            border-radius: 6px; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        h2 { margin: 0.5rem 0; font-size: 1.5rem; }
+        
+        .price-tag { 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            color: var(--primary-orange); 
+            margin: 1rem 0; 
+        }
+
+        /* Progress Visuals */
+        .moq-label { display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
+        
+        .progress-bar { 
+            background: #eee; 
+            height: 12px; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-fill { 
+            background: linear-gradient(90deg, var(--primary-orange), #ff9e00); 
+            height: 100%; 
+            width: 65%; /* This represents 650/1000 units */
+        }
+
+        /* Action Buttons */
+        .btn-main { 
+            background: var(--primary-orange); 
+            color: white; 
+            border: none; 
+            padding: 1rem; 
+            border-radius: 8px; 
+            font-size: 1rem; 
+            font-weight: 700; 
+            width: 100%; 
+            cursor: pointer; 
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn-main:hover { 
+            background: var(--dark-orange); 
+            transform: translateY(-2px);
+        }
+
+        .footer-info { font-size: 0.85rem; color: #636e72; margin-top: 1rem; text-align: center; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">PoolingB2B</div>
-        <input type="text" class="search-bar" placeholder="Search for lead buyers or products...">
-        <div>Hello, Business Admin</div>
+        <a href="#" class="logo">PoolingB2B</a>
+        <input type="text" class="search-bar" placeholder="Search products or buyers...">
+        <div style="font-weight: 600;">Hello, Business Admin</div>
     </nav>
 
     <div class="container">
         <div class="card">
-            <span class="badge">Lead Anchor: Pooling</span>
-            <div class="product-name">Industrial Steel Components</div>
-            <div class="price">$45.00/unit</div>
+            <span class="badge">LEAD ANCHOR: POOLING</span>
+            <h2>Industrial Steel Components</h2>
+            <div class="price-tag">$45.00/unit</div>
             
-            <p><strong>Progress Toward MOQ</strong></p>
-            <div class="progress-container">
+            <div class="moq-label">
+                <span>Progress Toward MOQ</span>
+                <span>65%</span>
+            </div>
+            <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
-            <small>Current: 650 units | MOQ: 1000 units</small>
-            <p><small>Deadline: 2026-03-15</small></p>
+            
+            <div style="margin-bottom: 1.5rem; line-height: 1.6;">
+                <strong>Current:</strong> 650 units<br>
+                <strong>MOQ Target:</strong> 1,000 units<br>
+                <strong>Deadline:</strong> March 15, 2026
+            </div>
 
-            <button onclick="alert('Negotiation Started!')">Join & Negotiate</button>
+            <button class="btn-main">Join & Negotiate</button>
+            <p class="footer-info">Secure Deposit: 10% ($250.00) held in escrow</p>
         </div>
     </div>
 
